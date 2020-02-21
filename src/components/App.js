@@ -2,16 +2,24 @@ import React from 'react';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import Header from './common/Header';
-
+import CoursesPage from './CoursesPage';
+import { Route , Switch, Redirect } from 'react-router-dom';
+import NotFoundPage from './NotFoundPage';
+import ManageCoursesPage from './ManageCoursePage';
 function App(){
-   function getPage() {
-    const route = window.location.pathname;
-    if(route  === "/about") return <AboutPage />;
-    return <HomePage />;
-   }
-   return (<div>
+   
+   return (
+         <div className="container-fluid">
             <Header />
-            {getPage()}
+            <Switch>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/courses" component={CoursesPage} />
+                <Route path="/about" component={AboutPage} />
+                <Route path="/course/:slug" component={ManageCoursesPage} />
+                <Redirect from="/about-page" to="about" / >
+                <Route component={NotFoundPage} />
+            </Switch>
+                
            </div>
            );
    
